@@ -83,6 +83,7 @@ const Auth = () => {
                     </Button>
                     <div className={googleContainer}>
                         <GoogleLogin
+                            clientId={process.env.REACT_APP_GOOGLE_ID}
                             render={(renderProps) => (
                                 <Button className={googleButton} color="primary" fullWidth onClick={renderProps.onClick} disabled={renderProps.disabled} startIcon={<Icon />} variant="contained">
                                     Google Sign In
