@@ -13,12 +13,7 @@ dotenv.config();
 
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
-app.use(cors(
-    {
-        origin: ["http://localhost:5000"],
-        credentials: true
-    }
-));
+app.use(cors());
 
 // Always use these routes after cors() middleware which solves the problem of CORS error
 app.use('/posts', postRoutes);
