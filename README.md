@@ -8,3 +8,7 @@ The platform fosters interaction, making it easy for users to connect and expres
 **Server:** Node JS, Express JS
 
 **Database:** Mongo DB
+
+## Live Demo
+
+[Post-Burst Live Demo](https://post-burst.netlify.app/)
