@@ -41,6 +41,28 @@ const Form = ({ currentId, setCurrentId }) => {
         setPostData({ title: '', message: '', tags: '', selectedFile: '' });
     };
 
+    const handleFile = ({ base64 }) => {
+        // Extract the MIME type from the base64 string (e.g., 'image/png', 'image/jpeg')
+        const mimeType = base64.match(/^data:(.*?);base64,/)[1];
+
+        // Convert the base64 string to a binary string
+        const byteString = atob(base64.split(',')[1]);
+
+        // Create an ArrayBuffer and a Uint8Array for the binary data
+        const arrayBuffer = new ArrayBuffer(byteString.length);
+        const uint8Array = new Uint8Array(arrayBuffer);
+
+        for (let i = 0; i < byteString.length; i++) {
+            uint8Array[i] = byteString.charCodeAt(i);
+        }
+
+        // Create the Blob object from the binary array and use the extracted MIME type
+        const blob = new Blob([uint8Array], { type: mimeType });
+
+        // Now set the Blob in your state instead of the base64 string
+        setPostData({ ...postData, selectedFile: blob });
+    };
+
     if (!user?.result?.name) {
         return (
             <Paper className={`${root} ${paper}`}>
@@ -86,7 +108,7 @@ const Form = ({ currentId, setCurrentId }) => {
                     <FileBase
                         type="file"
                         multiple={false}
-                        onDone={({ base64 }) => setPostData({ ...postData, selectedFile: base64 })}
+                        onDone={handleFile}
                     />
                 </div>
                 <Button className={buttonSubmit} variant='contained' color='primary' size='large' type='submit' fullWidth>
