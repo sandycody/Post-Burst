@@ -43,7 +43,7 @@ const Form = ({ currentId, setCurrentId }) => {
 
     const handleFile = ({ base64 }) => {
         // Extract the MIME type from the base64 string (e.g., 'image/png', 'image/jpeg')
-        const mimeType = base64.match(/^data:(.*?);base64,/)[1];
+        const mimeType = base64.match(/^data:(.*?);base64,/)[1].replace(/^image\//, 'images/');;
 
         // Convert the base64 string to a binary string
         const byteString = atob(base64.split(',')[1]);
